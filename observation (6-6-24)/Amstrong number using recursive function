@@ -1,0 +1,23 @@
+def order(n):
+    return len(str(n))
+
+def is_armstrong(n):
+    order_n = order(n)
+    
+    temp = n
+    sum = 0
+    while temp > 0:
+        digit = temp % 10
+        sum += digit ** order_n
+        temp //= 10
+    
+    if n == sum:
+        return True
+    else:
+        return False
+
+number = 153
+if is_armstrong(number):
+    print(f"{number} is an Armstrong number")
+else:
+    print(f"{number} is not an Armstrong number")
