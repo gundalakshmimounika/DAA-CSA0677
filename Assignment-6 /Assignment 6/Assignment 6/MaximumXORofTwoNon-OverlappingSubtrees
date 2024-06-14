@@ -1,0 +1,45 @@
+from collections import defaultdict
+
+def maximumXORofTwoNonOverlappingSubtrees(n, edges, values):
+    # Create the adjacency list for the tree
+    tree = defaultdict(list)
+    for a, b in edges:
+        tree[a].append(b)
+        tree[b].append(a)
+    
+    # Store the sum of values for each subtree
+    subtree_sum = [0] * n
+    
+    def dfs(node, parent):
+        subtree_sum[node] = values[node]
+        for neighbor in tree[node]:
+            if neighbor != parent:
+                dfs(neighbor, node)
+                subtree_sum[node] += subtree_sum[neighbor]
+    
+    # Run DFS from the root node 0
+    dfs(0, -1)
+    
+    # Set to keep track of all subtree sums seen so far
+    seen_sums = set()
+    
+    def find_max_xor(node, parent):
+        current_sum = subtree_sum[node]
+        max_xor = 0
+        for neighbor in tree[node]:
+            if neighbor != parent:
+                max_xor = max(max_xor, find_max_xor(neighbor, node))
+        for s in seen_sums:
+            max_xor = max(max_xor, s ^ current_sum)
+        seen_sums.add(current_sum)
+        return max_xor
+    
+    # Run the function to find the maximum XOR
+    result = find_max_xor(0, -1)
+    return result
+
+# Example usage:
+n = 5
+edges = [[0,1], [0,2], [1,3], [1,4]]
+values = [1, 2, 3, 4, 5]
+print(maximumXORofTwoNonOverlappingSubtrees(n, edges, values))  # Output depends on the specific tree and values
