@@ -1,0 +1,11 @@
+from collections import Counter
+
+def word_trap(words):
+    word_count = Counter(words)
+    trap_words = [word for word, count in word_count.items() if count == 1]
+    return trap_words
+
+# Example
+words = ["apple", "banana", "apple", "orange", "banana", "pear"]
+result = word_trap(words)
+print(result)
