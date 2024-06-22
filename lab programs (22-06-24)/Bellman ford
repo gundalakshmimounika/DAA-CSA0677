@@ -1,0 +1,5 @@
+def bellman_ford(graph, source):
+    distance = {node: float('infinity') for node in graph}
+    distance[source] = 0
+
+    for _ in range(len(graph) - 1):
