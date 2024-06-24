@@ -1,0 +1,11 @@
+def longest_nice_substring(s):
+    nice_subs = []
+    for i in range(len(s)):
+        for j in range(i+1, len(s)+1):
+            sub = s[i:j]
+            if all(c.lower() in sub and c.upper() in sub for c in set(sub)):
+                nice_subs.append(sub)
+    return max(nice_subs, key=len) if nice_subs else ""
+    
+s = "YazaAay"
+print(longest_nice_substring(s))
