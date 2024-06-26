@@ -1,0 +1,6 @@
+def count_prefix(words, pref):
+    return sum(1 for word in words if word.startswith(pref))
+
+words = ["pay", "attention", "practice", "attend"]
+pref = "at"
+print(count_prefix(words, pref))
