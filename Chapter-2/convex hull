@@ -1,0 +1,43 @@
+def orientation(p, q, r):
+    """ Calculate orientation of ordered triplet (p, q, r) """
+    val = (q[1] - p[1]) * (r[0] - q[0]) - (q[0] - p[0]) * (r[1] - q[1])
+    if val == 0:
+        return 0  # collinear
+    elif val > 0:
+        return 1  # clockwise
+    else:
+        return 2  # counterclockwise
+
+def convex_hull_brute_force(points):
+    """ Find the convex hull of a set of points using brute force """
+    n = len(points)
+    if n < 3:
+        return None
+    
+    # Function to check if a triplet forms a counterclockwise turn
+    def is_ccw(p, q, r):
+        return orientation(p, q, r) == 2
+    
+    convex_hull = []
+
+    # Check every triplet of points
+    for i in range(n):
+        for j in range(i + 1, n):
+            for k in range(j + 1, n):
+                p1, p2, p3 = points[i], points[j], points[k]
+                if is_ccw(p1, p2, p3):
+                    convex_hull.append(p1)
+                    convex_hull.append(p2)
+                    convex_hull.append(p3)
+    
+    # Remove duplicates and sort the convex hull points in counterclockwise order
+    convex_hull = list(set(convex_hull))
+    convex_hull.sort(key=lambda x: (math.atan2(x[1]-points[0][1], x[0]-points[0][0])))
+    
+    return convex_hull
+
+# Test case
+points = [(1, 1), (4, 6), (8, 1), (0, 0), (3, 3)]
+convex_hull_points = convex_hull_brute_force(points)
+print("Convex Hull points:")
+print(convex_hull_points)
