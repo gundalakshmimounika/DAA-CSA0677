@@ -1,0 +1,31 @@
+def bubble_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        # Initialize a flag to check if any swap happens
+        swapped = False
+        # Perform the bubble sort for the unsorted part of the list
+        for j in range(0, n - i - 1):
+            if arr[j] > arr[j + 1]:
+                # Swap if the element found is greater than the next element
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+                swapped = True
+        # If no two elements were swapped by the inner loop, then the list is sorted
+        if not swapped:
+            break
+    return arr
+
+# Test cases
+test_cases = [
+    [],
+    [1],
+    [7, 7, 7, 7],
+    [-5, -1, -3, -2, -4],
+    [5, 2, 9, 1, 5, 6],
+    [10, 8, 6, 4, 2],
+    [1, 2, 3, 4, 5]
+]
+
+# Applying the bubble_sort function to the test cases
+for i, test in enumerate(test_cases, 1):
+    sorted_array = bubble_sort(test.copy())  # Use .copy() to avoid modifying the original list
+    print(f"Test Case {i}: Input: {test} => Output: {sorted_array}")
