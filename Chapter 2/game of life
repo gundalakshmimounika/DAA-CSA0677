@@ -1,0 +1,50 @@
+def gameOfLife(board):
+    if not board:
+        return
+    
+    m, n = len(board), len(board[0])
+    # Make a copy of the original board to store the next state
+    next_board = [[board[row][col] for col in range(n)] for row in range(m)]
+    
+    # Directions for eight neighbors (horizontal, vertical, diagonal)
+    directions = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
+    
+    # Iterate through each cell in the board
+    for i in range(m):
+        for j in range(n):
+            live_neighbors = 0
+            # Count live neighbors
+            for dir in directions:
+                ni, nj = i + dir[0], j + dir[1]
+                if 0 <= ni < m and 0 <= nj < n and board[ni][nj] == 1:
+                    live_neighbors += 1
+            
+            # Apply the rules to determine the next state
+            if board[i][j] == 1:
+                if live_neighbors < 2 or live_neighbors > 3:
+                    next_board[i][j] = 0
+            else:
+                if live_neighbors == 3:
+                    next_board[i][j] = 1
+    
+    return next_board
+
+# Test cases
+board1 = [[0,1,0],[0,0,1],[1,1,1],[0,0,0]]
+board2 = [[1,1],[1,0]]
+
+print("Input board 1:")
+for row in board1:
+    print(row)
+print("Output board 1:")
+result1 = gameOfLife(board1)
+for row in result1:
+    print(row)
+
+print("\nInput board 2:")
+for row in board2:
+    print(row)
+print("Output board 2:")
+result2 = gameOfLife(board2)
+for row in result2:
+    print(row)
