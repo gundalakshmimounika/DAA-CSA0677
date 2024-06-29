@@ -1,0 +1,16 @@
+def find_substrings(words):
+    substrings = []
+    n = len(words)
+
+    # Check each word against every other word
+    for i in range(n):
+        for j in range(n):
+            if i != j and words[i] in words[j]:
+                substrings.append(words[i])
+                break
+
+    return substrings
+
+# Test cases
+print(find_substrings(["mass", "as", "hero", "superhero"]))  # Output: ["as", "hero"]
+print(find_substrings(["leetcode", "et", "code"]))          # Output: ["et", "code"]
