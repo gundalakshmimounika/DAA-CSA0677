@@ -1,0 +1,31 @@
+def rob(nums):
+    def rob_simple(nums):
+        if not nums:
+            return 0
+        if len(nums) == 1:
+            return nums[0]
+        
+        prev1, prev2 = 0, 0
+        for num in nums:
+            prev1, prev2 = prev2, max(prev1 + num, prev2)
+        
+        return prev2
+    
+    if not nums:
+        return 0
+    if len(nums) == 1:
+        return nums[0]
+    
+    # Rob from nums[0] to nums[n-2]
+    max1 = rob_simple(nums[:-1])
+    
+    # Rob from nums[1] to nums[n-1]
+    max2 = rob_simple(nums[1:])
+    
+    return max(max1, max2)
+
+# Test cases
+nums1 = [2, 3, 2]
+nums2 = [1, 2, 3, 1]
+print(f"Input: {nums1}\nOutput: The maximum money you can rob without alerting the police is {rob(nums1)}")
+print(f"Input: {nums2}\nOutput: The maximum money you can rob without alerting the police is {rob(nums2)}")
