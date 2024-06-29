@@ -1,0 +1,20 @@
+def process_list(lst):
+    # Return the list as is for empty list and single element list
+    if not lst or len(lst) == 1 or len(set(lst)) == 1:
+        return lst
+    # Sort the list for lists with multiple elements
+    else:
+        return sorted(lst)
+
+# Test cases
+test_cases = [
+    [],
+    [1],
+    [7, 7, 7, 7],
+    [-5, -1, -3, -2, -4]
+]
+
+# Applying the function to the test cases
+for i, test in enumerate(test_cases, 1):
+    result = process_list(test)
+    print(f"Test Case {i}: Input: {test} => Expected Output: {result}")
