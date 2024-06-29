@@ -1,0 +1,22 @@
+def find_max_element(arr):
+    if not arr:
+        return None
+    
+    max_element = float('-inf')  # Start with a very small value
+    
+    for num in arr:
+        if num > max_element:
+            max_element = num
+    
+    return max_element
+
+# Test cases
+test_cases = [
+    [1, 2, 3, 4, 5],
+    [7, 7, 7, 7, 7],
+    [-10, 2, 3, -4, 5]
+]
+
+print("Test Cases:")
+for idx, arr in enumerate(test_cases, 1):
+    print(f"Test Case {idx}: Input: {arr}, Output: {find_max_element(arr)}")
