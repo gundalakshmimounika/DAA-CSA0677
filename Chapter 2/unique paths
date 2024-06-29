@@ -1,0 +1,21 @@
+def uniquePaths(m, n):
+    # Initialize dp table
+    dp = [[0] * n for _ in range(m)]
+    
+    # Base case: start point
+    dp[0][0] = 1
+    
+    # Fill dp table
+    for i in range(m):
+        for j in range(n):
+            if i > 0:
+                dp[i][j] += dp[i-1][j]  # Add paths from above cell
+            if j > 0:
+                dp[i][j] += dp[i][j-1]  # Add paths from left cell
+    
+    # Return the number of unique paths to reach bottom-right corner
+    return dp[m-1][n-1]
+
+# Test cases
+print("Input: m=7, n=3, Output:", uniquePaths(7, 3))  # Expected output: 28
+print("Input: m=3, n=2, Output:", uniquePaths(3, 2))  # Expected output: 3
