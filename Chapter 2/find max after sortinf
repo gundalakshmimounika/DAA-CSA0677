@@ -1,0 +1,18 @@
+def find_max_after_sorting(nums):
+    if not nums:
+        return None  # Return None or an appropriate message for empty list
+    
+    sorted_list = sorted(nums)  # Sort the list
+    return sorted_list[-1]  # Return the maximum element
+
+# Test cases
+test_cases = [
+    [],
+    [5],
+    [3, 3, 3, 3, 3],
+]
+
+print("Test Cases:")
+for idx, nums in enumerate(test_cases, 1):
+    result = find_max_after_sorting(nums)
+    print(f"Test Case {idx}: Input: {nums}, Output: {result}")
