@@ -1,0 +1,33 @@
+def findWays(m, n, N, i, j):
+    # Initialize DP table
+    dp = [[[0] * n for _ in range(m)] for _ in range(N + 1)]
+    
+    # Initialize starting point
+    dp[0][i][j] = 1
+    
+    # Directions for movement: up, down, left, right
+    directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+    
+    # Populate the dp array
+    for step in range(1, N + 1):
+        for r in range(m):
+            for c in range(n):
+                for dr, dc in directions:
+                    nr, nc = r + dr, c + dc
+                    if 0 <= nr < m and 0 <= nc < n:
+                        dp[step][r][c] += dp[step - 1][nr][nc]
+                    else:
+                        dp[step][r][c] += 1  # Boundary counts
+                    
+    # Sum up all ways from boundary cells in the final step N
+    ways = 0
+    for r in range(m):
+        for c in range(n):
+            if r == 0 or r == m - 1 or c == 0 or c == n - 1:
+                ways += dp[N][r][c]
+    
+    return ways
+
+# Test cases
+print(findWays(2, 2, 2, 0, 0))  # Output: 6
+print(findWays(1, 3, 3, 0, 1))  # Output: 12
