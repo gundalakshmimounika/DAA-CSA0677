@@ -1,0 +1,26 @@
+def find_kth_missing(arr, k):
+    # Helper function to count missing numbers up to arr[idx]
+    def missing_count(idx):
+        return arr[idx] - (idx + 1)
+    
+    n = len(arr)
+    
+    # If the k-th missing number is greater than the last element of the array
+    if k > missing_count(n - 1):
+        return arr[-1] + (k - missing_count(n - 1))
+    
+    # Binary search to find the position where the k-th missing number lies
+    left, right = 0, n - 1
+    while left < right:
+        mid = (left + right) // 2
+        if missing_count(mid) < k:
+            left = mid + 1
+        else:
+            right = mid
+    
+    # The k-th missing number is between arr[left - 1] and arr[left]
+    return arr[left - 1] + (k - missing_count(left - 1))
+
+# Test cases
+print(find_kth_missing([2, 3, 4, 7, 11], 5))  # Output: 9
+print(find_kth_missing([1, 2, 3, 4], 2))      # Output: 6
