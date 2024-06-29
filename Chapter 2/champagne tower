@@ -1,0 +1,19 @@
+def champagneTower(poured, query_row, query_glass):
+    # Initialize the tower with zeros
+    tower = [[0.0] * (r + 1) for r in range(query_row + 1)]
+    tower[0][0] = poured
+    
+    # Process each row up to query_row
+    for i in range(query_row):
+        for j in range(len(tower[i])):
+            excess = (tower[i][j] - 1) / 2.0
+            if excess > 0:
+                tower[i + 1][j] += excess
+                tower[i + 1][j + 1] += excess
+    
+    # Return the amount of champagne in the queried glass
+    return min(1.0, tower[query_row][query_glass])
+
+# Test cases
+print(champagneTower(1, 1, 1))  # Output: 0.0
+print(champagneTower(2, 1, 1))  # Output: 0.5
