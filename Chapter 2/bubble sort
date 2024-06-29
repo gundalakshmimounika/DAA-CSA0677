@@ -1,0 +1,31 @@
+def bubble_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        # Flag to optimize for already sorted array
+        swapped = False
+        for j in range(0, n-i-1):
+            if arr[j] > arr[j+1]:
+                # Swap the elements
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+                swapped = True
+        
+        # If no two elements were swapped in the inner loop, array is already sorted
+        if not swapped:
+            break
+    
+    return arr
+
+# Test the bubble sort function
+arr1 = [64, 34, 25, 12, 22, 11, 90]
+arr2 = [5, 1, 4, 2, 8]
+
+print("Original arrays:")
+print("Array 1:", arr1)
+print("Array 2:", arr2)
+
+sorted_arr1 = bubble_sort(arr1)
+sorted_arr2 = bubble_sort(arr2)
+
+print("\nSorted arrays using Bubble Sort:")
+print("Sorted Array 1:", sorted_arr1)
+print("Sorted Array 2:", sorted_arr2)
