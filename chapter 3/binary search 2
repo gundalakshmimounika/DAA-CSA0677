@@ -1,0 +1,27 @@
+def binary_search_with_steps(arr, key):
+    low = 0
+    high = len(arr) - 1
+    steps = []
+
+    while low <= high:
+        mid = (low + high) // 2
+        steps.append(f"low: {low}, high: {high}, mid: {mid}, arr[mid]: {arr[mid]}")
+
+        if arr[mid] == key:
+            return mid, steps
+        elif arr[mid] < key:
+            low = mid + 1
+        else:
+            high = mid - 1
+
+    return -1, steps
+
+# Example usage
+arr = [3, 9, 14, 19, 25, 31, 42, 47, 53]
+search_key = 31
+index, steps = binary_search_with_steps(arr, search_key)
+
+print(f"Index of element {search_key}: {index}")
+print("Steps:")
+for step in steps:
+    print(step)
